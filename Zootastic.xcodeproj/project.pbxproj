@@ -14,6 +14,7 @@
 		F25E0B941A9BB767007E281E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F25E0B931A9BB767007E281E /* Images.xcassets */; };
 		F25E0B971A9BB767007E281E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F25E0B951A9BB767007E281E /* LaunchScreen.xib */; };
 		F25E0BA31A9BB767007E281E /* ZootasticTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25E0BA21A9BB767007E281E /* ZootasticTests.swift */; };
+		F25E0BAD1A9BB78D007E281E /* DataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25E0BAC1A9BB78D007E281E /* DataHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		F25E0B9C1A9BB767007E281E /* ZootasticTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZootasticTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F25E0BA11A9BB767007E281E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F25E0BA21A9BB767007E281E /* ZootasticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZootasticTests.swift; sourceTree = "<group>"; };
+		F25E0BAC1A9BB78D007E281E /* DataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 				F25E0B951A9BB767007E281E /* LaunchScreen.xib */,
 				F25E0B8B1A9BB767007E281E /* Zootastic.xcdatamodeld */,
 				F25E0B871A9BB767007E281E /* Supporting Files */,
+				F25E0BAC1A9BB78D007E281E /* DataHelper.swift */,
 			);
 			path = Zootastic;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F25E0B8F1A9BB767007E281E /* ViewController.swift in Sources */,
+				F25E0BAD1A9BB78D007E281E /* DataHelper.swift in Sources */,
 				F25E0B8D1A9BB767007E281E /* Zootastic.xcdatamodeld in Sources */,
 				F25E0B8A1A9BB767007E281E /* AppDelegate.swift in Sources */,
 			);
