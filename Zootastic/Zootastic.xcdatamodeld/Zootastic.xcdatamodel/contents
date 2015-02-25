@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6254" systemVersion="14C109" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Animal" syncable="YES">
+    <entity name="Animal" representedClassName="Zootastic.Animal" syncable="YES">
+        <attribute name="commonName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="habitat" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="classification" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Classification" inverseName="animals" inverseEntity="Classification" syncable="YES"/>
-        <relationship name="zoo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Zoo" syncable="YES"/>
+        <relationship name="zoos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Zoo" inverseName="animals" inverseEntity="Zoo" syncable="YES"/>
     </entity>
-    <entity name="Classification" syncable="YES">
-        <attribute name="commonName" optional="YES" attributeType="String" syncable="YES"/>
+    <entity name="Classification" representedClassName="Zootastic.Classification" syncable="YES">
+        <attribute name="family" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="scientificClassification" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="animals" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Animal" inverseName="classification" inverseEntity="Animal" syncable="YES"/>
     </entity>
-    <entity name="Zoo" syncable="YES">
+    <entity name="Zoo" representedClassName="Zootastic.Zoo" syncable="YES">
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="animals" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Animal" syncable="YES"/>
+        <relationship name="animals" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Animal" inverseName="zoos" inverseEntity="Animal" syncable="YES"/>
     </entity>
     <elements>
+        <element name="Animal" positionX="-468" positionY="-513" width="128" height="103"/>
+        <element name="Classification" positionX="-488" positionY="-322" width="128" height="103"/>
         <element name="Zoo" positionX="-461" positionY="-691" width="128" height="88"/>
-        <element name="Animal" positionX="-468" positionY="-513" width="128" height="88"/>
-        <element name="Classification" positionX="-488" positionY="-322" width="128" height="88"/>
     </elements>
 </model>
