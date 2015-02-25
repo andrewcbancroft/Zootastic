@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F2276E871A9D8B2900D0C6E1 /* Animal.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2276E851A9D8B2900D0C6E1 /* Animal.swift */; };
+		F2276E881A9D8B2900D0C6E1 /* Classification.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2276E861A9D8B2900D0C6E1 /* Classification.swift */; };
 		F25E0B8A1A9BB767007E281E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25E0B891A9BB767007E281E /* AppDelegate.swift */; };
 		F25E0B8D1A9BB767007E281E /* Zootastic.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F25E0B8B1A9BB767007E281E /* Zootastic.xcdatamodeld */; };
 		F25E0B8F1A9BB767007E281E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25E0B8E1A9BB767007E281E /* ViewController.swift */; };
@@ -15,6 +17,7 @@
 		F25E0B971A9BB767007E281E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F25E0B951A9BB767007E281E /* LaunchScreen.xib */; };
 		F25E0BA31A9BB767007E281E /* ZootasticTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25E0BA21A9BB767007E281E /* ZootasticTests.swift */; };
 		F25E0BAD1A9BB78D007E281E /* DataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25E0BAC1A9BB78D007E281E /* DataHelper.swift */; };
+		F25E0BAF1A9BBBF0007E281E /* Zoo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25E0BAE1A9BBBF0007E281E /* Zoo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,6 +31,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F2276E851A9D8B2900D0C6E1 /* Animal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animal.swift; sourceTree = "<group>"; };
+		F2276E861A9D8B2900D0C6E1 /* Classification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Classification.swift; sourceTree = "<group>"; };
 		F25E0B841A9BB767007E281E /* Zootastic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Zootastic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F25E0B881A9BB767007E281E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F25E0B891A9BB767007E281E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -40,6 +45,7 @@
 		F25E0BA11A9BB767007E281E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F25E0BA21A9BB767007E281E /* ZootasticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZootasticTests.swift; sourceTree = "<group>"; };
 		F25E0BAC1A9BB78D007E281E /* DataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataHelper.swift; sourceTree = "<group>"; };
+		F25E0BAE1A9BBBF0007E281E /* Zoo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Zoo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,12 +87,15 @@
 		F25E0B861A9BB767007E281E /* Zootastic */ = {
 			isa = PBXGroup;
 			children = (
+				F2276E851A9D8B2900D0C6E1 /* Animal.swift */,
+				F2276E861A9D8B2900D0C6E1 /* Classification.swift */,
 				F25E0B891A9BB767007E281E /* AppDelegate.swift */,
 				F25E0B8E1A9BB767007E281E /* ViewController.swift */,
 				F25E0B901A9BB767007E281E /* Main.storyboard */,
 				F25E0B931A9BB767007E281E /* Images.xcassets */,
 				F25E0B951A9BB767007E281E /* LaunchScreen.xib */,
 				F25E0B8B1A9BB767007E281E /* Zootastic.xcdatamodeld */,
+				F25E0BAE1A9BBBF0007E281E /* Zoo.swift */,
 				F25E0B871A9BB767007E281E /* Supporting Files */,
 				F25E0BAC1A9BB78D007E281E /* DataHelper.swift */,
 			);
@@ -220,8 +229,11 @@
 			files = (
 				F25E0B8F1A9BB767007E281E /* ViewController.swift in Sources */,
 				F25E0BAD1A9BB78D007E281E /* DataHelper.swift in Sources */,
+				F2276E881A9D8B2900D0C6E1 /* Classification.swift in Sources */,
 				F25E0B8D1A9BB767007E281E /* Zootastic.xcdatamodeld in Sources */,
+				F25E0BAF1A9BBBF0007E281E /* Zoo.swift in Sources */,
 				F25E0B8A1A9BB767007E281E /* AppDelegate.swift in Sources */,
+				F2276E871A9D8B2900D0C6E1 /* Animal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,6 +427,7 @@
 				F25E0BA81A9BB767007E281E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F25E0BA91A9BB767007E281E /* Build configuration list for PBXNativeTarget "ZootasticTests" */ = {
 			isa = XCConfigurationList;
@@ -423,6 +436,7 @@
 				F25E0BAB1A9BB767007E281E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
