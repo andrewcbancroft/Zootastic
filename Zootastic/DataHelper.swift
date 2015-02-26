@@ -16,9 +16,9 @@ public class DataHelper {
 	
 	private func seedZoos() {
 		let zoos = [
-			(name: "San Diego Zoo", location: "San Diego, CA"),
+			(name: "Oklahoma City Zoo", location: "Oklahoma City, OK"),
 			(name: "Lowry Park Zoo", location: "Tampa, FL"),
-			(name: "Oklahoma City Zoo", location: "Oklahoma City, OK")
+			(name: "San Diego Zoo", location: "San Diego, CA")
 		]
 		
 		for zoo in zoos {
@@ -67,30 +67,31 @@ public class DataHelper {
 		let zooFetchRequest = NSFetchRequest(entityName: "Zoo")
 		let allZoos = context.executeFetchRequest(zooFetchRequest, error: nil) as [Zoo]
 		
+		let oklahomaCityZoo = allZoos.filter({ (z: Zoo) -> Bool in
+			return z.name == "Oklahoma City Zoo"
+		}).first
+		
 		let sanDiegoZoo = allZoos.filter({ (z: Zoo) -> Bool in
 			return z.name == "San Diego Zoo"
 		}).first
 		
-		let oklahomaCityZoo = allZoos.filter({ (z: Zoo) -> Bool in
-			return z.name == "Oklahoma City Zoo"
-		}).first
 		
 		let lowryParkZoo = allZoos.filter({ (z: Zoo) -> Bool in
 			return z.name == "Lowry Park Zoo"
 		}).first
 		
 		let animals = [
-			(commonName: "Pygmy Fruit-eating Bat", habitat: "Flying Mamals Exhibit", classification: bat, zoos: NSSet(array: [lowryParkZoo!, oklahomaCityZoo!, sanDiegoZoo!])),
-			(commonName: "Mantled Howler", habitat: "Primate Exhibit", classification: monkey, zoos: NSSet(array: [sanDiegoZoo!, lowryParkZoo!])),
-			(commonName: "Geoffroy’s Spider Monkey", habitat: "Primate Exhibit", classification: monkey, zoos: NSSet(array: [sanDiegoZoo!])),
-			(commonName: "West Indian Manatee", habitat: "Aquatic Mamals Exhibit", classification: manatee, zoos: NSSet(array: [lowryParkZoo!]))
+			(commonName: "Pygmy Fruit-eating Bat", habitat: "Flying Mamals Exhibit", classification: bat!, zoos: NSSet(array: [lowryParkZoo!, oklahomaCityZoo!, sanDiegoZoo!])),
+			(commonName: "Mantled Howler", habitat: "Primate Exhibit", classification: monkey!, zoos: NSSet(array: [sanDiegoZoo!, lowryParkZoo!])),
+			(commonName: "Geoffroy’s Spider Monkey", habitat: "Primate Exhibit", classification: monkey!, zoos: NSSet(array: [sanDiegoZoo!])),
+			(commonName: "West Indian Manatee", habitat: "Aquatic Mamals Exhibit", classification: manatee!, zoos: NSSet(array: [lowryParkZoo!]))
 		]
 		
 		for animal in animals {
 			let newAnimal = NSEntityDescription.insertNewObjectForEntityForName("Animal", inManagedObjectContext: context) as Animal
 			newAnimal.commonName = animal.commonName
 			newAnimal.habitat = animal.habitat
-			newAnimal.classification = animal.classification!
+			newAnimal.classification = animal.classification
 			newAnimal.zoos = animal.zoos
 		}
 		
