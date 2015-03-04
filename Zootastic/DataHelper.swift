@@ -134,7 +134,7 @@ public class DataHelper {
 		let allAnimals = context.executeFetchRequest(animalFetchRequest, error: nil) as [Animal]
 		
 		for animal in allAnimals {
-			print("\(animal.commonName), a member of the \(animal.classification.family) family, lives in the \(animal.habitat) at the following zoos:\n")
+			print("\(animal.commonName), a member of the \(animal.classification.order) family, lives in the \(animal.habitat) at the following zoos:\n")
 			for zoo in animal.zoos {
 				print("> \(zoo.name)\n")
 			}

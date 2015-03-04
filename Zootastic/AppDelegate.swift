@@ -27,6 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			dataHelper.printAllAnimals()
 		}
 		
+		let rootViewController = self.window!.rootViewController as MainViewController
+		rootViewController.context = self.managedObjectContext;
+		
 		return true
 	}
 
