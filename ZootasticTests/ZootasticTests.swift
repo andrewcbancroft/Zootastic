@@ -8,29 +8,37 @@
 
 import UIKit
 import XCTest
+import CoreData
+import Zootastic
 
 class ZootasticTests: XCTestCase {
+	func testSeedZoosInserts3ZooObjectsIntoDataStore() {
+		// arrange
+		let context = setUpInMemoryManagedObjectContext()
+		let dataHelper = DataHelper(context: context)
+		
+		// act
+		dataHelper.seedZoos()
+		
+		// assert
+		let fetchRequest = NSFetchRequest(entityName: "Zoo")
+		let zoos = context.executeFetchRequest(fetchRequest, error: nil)
+		
+		XCTAssertTrue(zoos?.count == 3, "There should have been 3 Zoo objects inserted by seedZoos()")
+	}
+}
+
+// See http://www.andrewcbancroft.com/2015/01/13/unit-testing-model-layer-core-data-swift/
+// for more information on this helper function
+
+func setUpInMemoryManagedObjectContext() -> NSManagedObjectContext {
+    let managedObjectModel = NSManagedObjectModel.mergedModelFromBundles([NSBundle.mainBundle()])!
     
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
+    let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
+    persistentStoreCoordinator.addPersistentStoreWithType(NSInMemoryStoreType, configuration: nil, URL: nil, options: nil, error: nil)
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
+    let managedObjectContext = NSManagedObjectContext()
+    managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
     
-    func testExample() {
-        // This is an example of a functional test case.
-        XCTAssert(true, "Pass")
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock() {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
+    return managedObjectContext
 }

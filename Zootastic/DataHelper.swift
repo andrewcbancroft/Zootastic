@@ -4,7 +4,7 @@ import CoreData
 public class DataHelper {
 	let context: NSManagedObjectContext
 	
-	init(context: NSManagedObjectContext) {
+	public init(context: NSManagedObjectContext) {
 		self.context = context
 	}
 	
@@ -14,7 +14,7 @@ public class DataHelper {
 		seedAnimals()
 	}
 	
-	private func seedZoos() {
+	public func seedZoos() {
 		let zoos = [
 			(name: "Oklahoma City Zoo", location: "Oklahoma City, OK"),
 			(name: "Lowry Park Zoo", location: "Tampa, FL"),
@@ -30,7 +30,7 @@ public class DataHelper {
 		context.save(nil)
 	}
 	
-	private func seedClassifications() {
+	public func seedClassifications() {
 		let classifications = [
 			(scientificClassification: "Mammalia", order: "Sirenia", family: "Trichechidae"),
 			(scientificClassification: "Mammalia", order: "Primates", family: "Atelidae"),
@@ -47,7 +47,7 @@ public class DataHelper {
 		context.save(nil)
 	}
 	
-	private func seedAnimals() {
+	public func seedAnimals() {
 		let classificationFetchRequest = NSFetchRequest(entityName: "Classification")
 		let allClassifications = context.executeFetchRequest(classificationFetchRequest, error: nil) as [Classification]
 
