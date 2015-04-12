@@ -22,7 +22,7 @@ public class DataHelper {
 		]
 		
 		for zoo in zoos {
-			let newZoo = NSEntityDescription.insertNewObjectForEntityForName("Zoo", inManagedObjectContext: context) as Zoo
+			let newZoo = NSEntityDescription.insertNewObjectForEntityForName("Zoo", inManagedObjectContext: context) as! Zoo
 			newZoo.name = zoo.name
 			newZoo.location = zoo.location
 		}
@@ -38,7 +38,7 @@ public class DataHelper {
 		]
 		
 		for classification in classifications {
-			let newClassification = NSEntityDescription.insertNewObjectForEntityForName("Classification", inManagedObjectContext: context) as Classification
+			let newClassification = NSEntityDescription.insertNewObjectForEntityForName("Classification", inManagedObjectContext: context) as! Classification
 			newClassification.scientificClassification = classification.scientificClassification
 			newClassification.family = classification.family
 			newClassification.order = classification.order
@@ -49,7 +49,7 @@ public class DataHelper {
 	
 	private func seedAnimals() {
 		let classificationFetchRequest = NSFetchRequest(entityName: "Classification")
-		let allClassifications = context.executeFetchRequest(classificationFetchRequest, error: nil) as [Classification]
+		let allClassifications = context.executeFetchRequest(classificationFetchRequest, error: nil) as! [Classification]
 
 		let manatee = allClassifications.filter({(c: Classification) -> Bool in
 			return c.family == "Trichechidae"
@@ -65,7 +65,7 @@ public class DataHelper {
 		
 		
 		let zooFetchRequest = NSFetchRequest(entityName: "Zoo")
-		let allZoos = context.executeFetchRequest(zooFetchRequest, error: nil) as [Zoo]
+		let allZoos = context.executeFetchRequest(zooFetchRequest, error: nil) as! [Zoo]
 		
 		let oklahomaCityZoo = allZoos.filter({ (z: Zoo) -> Bool in
 			return z.name == "Oklahoma City Zoo"
@@ -88,7 +88,7 @@ public class DataHelper {
 		]
 		
 		for animal in animals {
-			let newAnimal = NSEntityDescription.insertNewObjectForEntityForName("Animal", inManagedObjectContext: context) as Animal
+			let newAnimal = NSEntityDescription.insertNewObjectForEntityForName("Animal", inManagedObjectContext: context) as! Animal
 			newAnimal.commonName = animal.commonName
 			newAnimal.habitat = animal.habitat
 			newAnimal.classification = animal.classification
@@ -105,7 +105,7 @@ public class DataHelper {
 		
 		zooFetchRequest.sortDescriptors = [primarySortDescriptor]
 		
-		let allZoos = context.executeFetchRequest(zooFetchRequest, error: nil) as [Zoo]
+		let allZoos = context.executeFetchRequest(zooFetchRequest, error: nil) as! [Zoo]
 		
 		for zoo in allZoos {
 			print("Zoo Name: \(zoo.name)\nLocation: \(zoo.location) \n-------\n")
@@ -118,7 +118,7 @@ public class DataHelper {
 		
 		classificationFetchRequest.sortDescriptors = [primarySortDescriptor]
 		
-		let allClassifications = context.executeFetchRequest(classificationFetchRequest, error: nil) as [Classification]
+		let allClassifications = context.executeFetchRequest(classificationFetchRequest, error: nil) as! [Classification]
 		
 		for classification in allClassifications {
 			print("Scientific Classification: \(classification.scientificClassification)\nOrder: \(classification.order)\nFamily: \(classification.family) \n-------\n")
@@ -131,7 +131,7 @@ public class DataHelper {
 		
 		animalFetchRequest.sortDescriptors = [primarySortDescriptor]
 		
-		let allAnimals = context.executeFetchRequest(animalFetchRequest, error: nil) as [Animal]
+		let allAnimals = context.executeFetchRequest(animalFetchRequest, error: nil) as! [Animal]
 		
 		for animal in allAnimals {
 			print("\(animal.commonName), a member of the \(animal.classification.order) family, lives in the \(animal.habitat) at the following zoos:\n")
