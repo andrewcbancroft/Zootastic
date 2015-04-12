@@ -55,7 +55,7 @@ public class MainViewController: UIViewController, UITableViewDataSource, UITabl
 	
 	public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		if let sections = fetchedResultsController.sections {
-			let currentSection = sections[section] as NSFetchedResultsSectionInfo
+			let currentSection = sections[section] as! NSFetchedResultsSectionInfo
 			return currentSection.numberOfObjects
 		}
 		
@@ -63,8 +63,8 @@ public class MainViewController: UIViewController, UITableViewDataSource, UITabl
 	}
 	
 	public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
-		let animal = fetchedResultsController.objectAtIndexPath(indexPath) as Animal
+		let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
+		let animal = fetchedResultsController.objectAtIndexPath(indexPath) as! Animal
 		
 		cell.textLabel?.text = animal.commonName
 		cell.detailTextLabel?.text = animal.habitat
@@ -74,7 +74,7 @@ public class MainViewController: UIViewController, UITableViewDataSource, UITabl
 	
 	public func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		if let sections = fetchedResultsController.sections {
-			let currentSection = sections[section] as NSFetchedResultsSectionInfo
+			let currentSection = sections[section] as! NSFetchedResultsSectionInfo
 			return currentSection.name
 		}
 		
