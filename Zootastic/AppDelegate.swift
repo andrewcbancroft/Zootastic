@@ -26,9 +26,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			dataHelper.printAllClassifications()
 			dataHelper.printAllAnimals()
 		}
-		
-		let rootViewController = self.window!.rootViewController as! MainViewController
-		rootViewController.context = self.managedObjectContext;
+        
+        let navigationController = window?.rootViewController as! UINavigationController
+        let firstVC = navigationController.viewControllers[0] as! MainViewController
+		firstVC.context = self.managedObjectContext;
 		
 		return true
 	}
