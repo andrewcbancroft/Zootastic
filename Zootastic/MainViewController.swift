@@ -11,9 +11,10 @@
 import UIKit
 import CoreData
 
-public class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
+public class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, UIActionSheetDelegate {
 	
 	public var context: NSManagedObjectContext!
+	@IBOutlet weak var tableView: UITableView!
 	
 	lazy var fetchedResultsController: NSFetchedResultsController = {
 		let animalsFetchRequest = NSFetchRequest(entityName: "Animal")
@@ -83,6 +84,106 @@ public class MainViewController: UIViewController, UITableViewDataSource, UITabl
 		return nil
 	}
 	
+	// MARK: TableView Delegate
+	public func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+		if editingStyle == UITableViewCellEditingStyle.Delete {
+			let animal = fetchedResultsController.objectAtIndexPath(indexPath) as! Animal
+			confirmDeleteForAnimal(animal)
+		}
+	}
+	
+	var animalToDelete: Animal?
+	
+	func confirmDeleteForAnimal(animal: Animal) {
+		self.animalToDelete = animal
+		let confirmDeleteActionSheet = UIActionSheet(title: "Are you sure you want to permanently delete \(animal.commonName)?", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: "Delete")
+		confirmDeleteActionSheet.showInView(self.view)
+	}
+	
+	// MARK: UIActionSheetDelegate methods
+	public func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
+		if buttonIndex == 0 {
+			deleteAnimal()
+		} else {
+			self.animalToDelete = nil
+		}
+	}
+	
+	func deleteAnimal() {
+		if let verseToDelete = self.animalToDelete {
+			self.context.deleteObject(verseToDelete)
+			self.context.save(nil)
+			self.animalToDelete = nil
+		}
+	}
+	
+	// MARK: NSFetchedResultsControllerDelegate methods
+	public func controllerWillChangeContent(controller: NSFetchedResultsController) {
+		self.tableView.beginUpdates()
+	}
+	
+	public func controller(
+		controller: NSFetchedResultsController,
+		didChangeObject anObject: AnyObject,
+		atIndexPath indexPath: NSIndexPath?,
+		forChangeType type: NSFetchedResultsChangeType,
+		newIndexPath: NSIndexPath?) {
+			
+			switch type {
+			case NSFetchedResultsChangeType.Insert:
+				if let insertIndexPath = newIndexPath {
+					self.tableView.insertRowsAtIndexPaths([insertIndexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+				}
+			case NSFetchedResultsChangeType.Delete:
+				if let deleteIndexPath = indexPath {
+					self.tableView.deleteRowsAtIndexPaths([deleteIndexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+				}
+			case NSFetchedResultsChangeType.Update:
+				if let updateIndexPath = indexPath {
+					let cell = self.tableView.cellForRowAtIndexPath(updateIndexPath)
+					let animal = self.fetchedResultsController.objectAtIndexPath(updateIndexPath) as? Animal
+					
+					cell?.textLabel?.text = animal?.commonName
+					cell?.detailTextLabel?.text = animal?.habitat
+				}
+			case NSFetchedResultsChangeType.Move:
+				if let deleteIndexPath = indexPath {
+					self.tableView.deleteRowsAtIndexPaths([deleteIndexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+				}
+				
+				if let insertIndexPath = newIndexPath {
+					self.tableView.insertRowsAtIndexPaths([insertIndexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+				}
+			}
+	}
+	
+	public func controller(
+		controller: NSFetchedResultsController,
+		didChangeSection sectionInfo: NSFetchedResultsSectionInfo,
+		atIndex sectionIndex: Int,
+		forChangeType type: NSFetchedResultsChangeType) {
+		
+			switch type {
+			case .Insert:
+				let sectionIndexSet = NSIndexSet(index: sectionIndex)
+				self.tableView.insertSections(sectionIndexSet, withRowAnimation: UITableViewRowAnimation.Fade)
+			case .Delete:
+				let sectionIndexSet = NSIndexSet(index: sectionIndex)
+				self.tableView.deleteSections(sectionIndexSet, withRowAnimation: UITableViewRowAnimation.Fade)
+			default:
+				""
+			}
+	}
+	
+	public func controller(controller: NSFetchedResultsController, sectionIndexTitleForSectionName sectionName: String?) -> String? {
+		return sectionName
+	}
+	
+	public func controllerDidChangeContent(controller: NSFetchedResultsController) {
+		self.tableView.endUpdates()
+	}
+	
+	// MARK: Navigation
 	public override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 		if segue.identifier == SegueIdentifiers.AnimalEditorSegue.rawValue {
 			let destination = segue.destinationViewController as! AnimalEditorViewController
