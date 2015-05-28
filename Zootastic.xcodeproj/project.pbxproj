@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		F2276E871A9D8B2900D0C6E1 /* Animal.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2276E851A9D8B2900D0C6E1 /* Animal.swift */; };
 		F2276E881A9D8B2900D0C6E1 /* Classification.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2276E861A9D8B2900D0C6E1 /* Classification.swift */; };
+		F256C2601B16B79D002928A5 /* AnimalEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F256C25F1B16B79D002928A5 /* AnimalEditorViewController.swift */; };
+		F256C2621B16BE7E002928A5 /* SegueIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F256C2611B16BE7E002928A5 /* SegueIdentifiers.swift */; };
 		F25E0B8A1A9BB767007E281E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25E0B891A9BB767007E281E /* AppDelegate.swift */; };
 		F25E0B8D1A9BB767007E281E /* Zootastic.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F25E0B8B1A9BB767007E281E /* Zootastic.xcdatamodeld */; };
 		F25E0B8F1A9BB767007E281E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25E0B8E1A9BB767007E281E /* MainViewController.swift */; };
@@ -33,6 +35,8 @@
 /* Begin PBXFileReference section */
 		F2276E851A9D8B2900D0C6E1 /* Animal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animal.swift; sourceTree = "<group>"; };
 		F2276E861A9D8B2900D0C6E1 /* Classification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Classification.swift; sourceTree = "<group>"; };
+		F256C25F1B16B79D002928A5 /* AnimalEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimalEditorViewController.swift; sourceTree = "<group>"; };
+		F256C2611B16BE7E002928A5 /* SegueIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueIdentifiers.swift; sourceTree = "<group>"; };
 		F25E0B841A9BB767007E281E /* Zootastic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Zootastic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F25E0B881A9BB767007E281E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F25E0B891A9BB767007E281E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -95,9 +99,11 @@
 				F25E0BAC1A9BB78D007E281E /* DataHelper.swift */,
 				F25E0B891A9BB767007E281E /* AppDelegate.swift */,
 				F25E0B8E1A9BB767007E281E /* MainViewController.swift */,
+				F256C25F1B16B79D002928A5 /* AnimalEditorViewController.swift */,
 				F25E0B931A9BB767007E281E /* Images.xcassets */,
 				F25E0B951A9BB767007E281E /* LaunchScreen.xib */,
 				F25E0B871A9BB767007E281E /* Supporting Files */,
+				F256C2611B16BE7E002928A5 /* SegueIdentifiers.swift */,
 			);
 			path = Zootastic;
 			sourceTree = "<group>";
@@ -233,6 +239,8 @@
 				F25E0B8D1A9BB767007E281E /* Zootastic.xcdatamodeld in Sources */,
 				F25E0BAF1A9BBBF0007E281E /* Zoo.swift in Sources */,
 				F25E0B8A1A9BB767007E281E /* AppDelegate.swift in Sources */,
+				F256C2621B16BE7E002928A5 /* SegueIdentifiers.swift in Sources */,
+				F256C2601B16B79D002928A5 /* AnimalEditorViewController.swift in Sources */,
 				F2276E871A9D8B2900D0C6E1 /* Animal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
