@@ -82,5 +82,12 @@ public class MainViewController: UIViewController, UITableViewDataSource, UITabl
 		
 		return nil
 	}
+	
+	public override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+		if segue.identifier == SegueIdentifiers.AnimalEditorSegue.rawValue {
+			let destination = segue.destinationViewController as! AnimalEditorViewController
+			destination.context = self.context
+		}
+	}
 }
 
