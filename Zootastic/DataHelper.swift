@@ -27,7 +27,10 @@ public class DataHelper {
 			newZoo.location = zoo.location
 		}
 		
-		context.save(nil)
+		do {
+			try context.save()
+		} catch _ {
+		}
 	}
 	
 	private func seedClassifications() {
@@ -44,12 +47,15 @@ public class DataHelper {
 			newClassification.order = classification.order
 		}
 		
-		context.save(nil)
+		do {
+			try context.save()
+		} catch _ {
+		}
 	}
 	
 	private func seedAnimals() {
 		let classificationFetchRequest = NSFetchRequest(entityName: "Classification")
-		let allClassifications = context.executeFetchRequest(classificationFetchRequest, error: nil) as! [Classification]
+		let allClassifications = (try! context.executeFetchRequest(classificationFetchRequest)) as! [Classification]
 
 		let manatee = allClassifications.filter({(c: Classification) -> Bool in
 			return c.family == "Trichechidae"
@@ -65,7 +71,7 @@ public class DataHelper {
 		
 		
 		let zooFetchRequest = NSFetchRequest(entityName: "Zoo")
-		let allZoos = context.executeFetchRequest(zooFetchRequest, error: nil) as! [Zoo]
+		let allZoos = (try! context.executeFetchRequest(zooFetchRequest)) as! [Zoo]
 		
 		let oklahomaCityZoo = allZoos.filter({ (z: Zoo) -> Bool in
 			return z.name == "Oklahoma City Zoo"
@@ -95,7 +101,10 @@ public class DataHelper {
 			newAnimal.zoos = animal.zoos
 		}
 		
-		context.save(nil)
+		do {
+			try context.save()
+		} catch _ {
+		}
 	}
 	
 	
@@ -105,10 +114,10 @@ public class DataHelper {
 		
 		zooFetchRequest.sortDescriptors = [primarySortDescriptor]
 		
-		let allZoos = context.executeFetchRequest(zooFetchRequest, error: nil) as! [Zoo]
+		let allZoos = (try! context.executeFetchRequest(zooFetchRequest)) as! [Zoo]
 		
 		for zoo in allZoos {
-			print("Zoo Name: \(zoo.name)\nLocation: \(zoo.location) \n-------\n")
+			print("Zoo Name: \(zoo.name)\nLocation: \(zoo.location) \n-------\n", terminator: "")
 		}
 	}
 	
@@ -118,10 +127,10 @@ public class DataHelper {
 		
 		classificationFetchRequest.sortDescriptors = [primarySortDescriptor]
 		
-		let allClassifications = context.executeFetchRequest(classificationFetchRequest, error: nil) as! [Classification]
+		let allClassifications = (try! context.executeFetchRequest(classificationFetchRequest)) as! [Classification]
 		
 		for classification in allClassifications {
-			print("Scientific Classification: \(classification.scientificClassification)\nOrder: \(classification.order)\nFamily: \(classification.family) \n-------\n")
+			print("Scientific Classification: \(classification.scientificClassification)\nOrder: \(classification.order)\nFamily: \(classification.family) \n-------\n", terminator: "")
 		}
 	}
 	
@@ -131,14 +140,14 @@ public class DataHelper {
 		
 		animalFetchRequest.sortDescriptors = [primarySortDescriptor]
 		
-		let allAnimals = context.executeFetchRequest(animalFetchRequest, error: nil) as! [Animal]
+		let allAnimals = (try! context.executeFetchRequest(animalFetchRequest)) as! [Animal]
 		
 		for animal in allAnimals {
-			print("\(animal.commonName), a member of the \(animal.classification.family) family, lives in the \(animal.habitat) at the following zoos:\n")
+			print("\(animal.commonName), a member of the \(animal.classification.family) family, lives in the \(animal.habitat) at the following zoos:\n", terminator: "")
 			for zoo in animal.zoos {
-				print("> \(zoo.name)\n")
+				print("> \(zoo.name)\n", terminator: "")
 			}
-			print("-------\n")
+			print("-------\n", terminator: "")
 		}
 	}
 }
