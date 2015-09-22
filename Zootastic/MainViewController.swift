@@ -183,7 +183,7 @@ public class MainViewController: UIViewController, UITableViewDataSource, UITabl
 			}
 	}
 	
-	public func controller(controller: NSFetchedResultsController, sectionIndexTitleForSectionName sectionName: String?) -> String? {
+	public func controller(controller: NSFetchedResultsController, sectionIndexTitleForSectionName sectionName: String) -> String? {
 		return sectionName
 	}
 	

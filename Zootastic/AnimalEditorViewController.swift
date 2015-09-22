@@ -25,9 +25,13 @@ public class AnimalEditorViewController: UIViewController, UIPickerViewDataSourc
 	
 	func fetchClassifications() -> [Classification] {
 		let fetchRequest = NSFetchRequest(entityName: "Classification")
-		let classifications = context.executeFetchRequest(fetchRequest, error: nil) as! [Classification]
-		
-		return classifications
+        
+        do {
+             let classifications = try context.executeFetchRequest(fetchRequest) as! [Classification]
+             return classifications
+        } catch {}
+
+        return []
 	}
 	
 	public func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
@@ -38,7 +42,7 @@ public class AnimalEditorViewController: UIViewController, UIPickerViewDataSourc
 		return classifications.count
 	}
 	
-	public func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+	public func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
 		let classification = classifications[row]
 		let title = "\(classification.family) - \(classification.order)"
 		return title
@@ -46,13 +50,21 @@ public class AnimalEditorViewController: UIViewController, UIPickerViewDataSourc
 	
 	@IBAction func saveButtonTapped(sender: UIBarButtonItem) {
 		let newAnimal = NSEntityDescription.insertNewObjectForEntityForName("Animal", inManagedObjectContext: context) as! Animal
-		newAnimal.commonName = commonNameTextField.text
-		newAnimal.habitat = habitatTextField.text
+        
+        if let commonNameText = commonNameTextField.text {
+            newAnimal.commonName = commonNameText
+        }
+        
+        if let habitatText = habitatTextField.text {
+            newAnimal.habitat = habitatText
+        }
 		
 		let selectedClassification = classifications[classificationPickerView.selectedRowInComponent(0)]
 		newAnimal.classification = selectedClassification
 		
-		context.save(nil)
+        do {
+            try context.save()
+        } catch {}
 		
 		self.navigationController?.popViewControllerAnimated(true)
 	}
