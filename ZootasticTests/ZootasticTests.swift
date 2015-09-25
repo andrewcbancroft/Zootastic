@@ -22,9 +22,10 @@ class ZootasticTests: XCTestCase {
 		
 		// assert
 		let fetchRequest = NSFetchRequest(entityName: "Zoo")
-		let zoos = context.executeFetchRequest(fetchRequest, error: nil)
-		
-		XCTAssertTrue(zoos?.count == 3, "There should have been 3 Zoo objects inserted by seedZoos()")
+		do {
+			let zoos = try context.executeFetchRequest(fetchRequest)
+			XCTAssertTrue(zoos.count == 3, "There should have been 3 Zoo objects inserted by seedZoos()")
+		} catch _ {}
 	}
 }
 
@@ -35,7 +36,7 @@ func setUpInMemoryManagedObjectContext() -> NSManagedObjectContext {
     let managedObjectModel = NSManagedObjectModel.mergedModelFromBundles([NSBundle.mainBundle()])!
     
     let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
-    persistentStoreCoordinator.addPersistentStoreWithType(NSInMemoryStoreType, configuration: nil, URL: nil, options: nil, error: nil)
+    try! persistentStoreCoordinator.addPersistentStoreWithType(NSInMemoryStoreType, configuration: nil, URL: nil, options: nil)
     
     let managedObjectContext = NSManagedObjectContext()
     managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
