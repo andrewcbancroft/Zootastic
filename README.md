@@ -12,4 +12,4 @@ Master contains all merged changes to the Zootastic example.
 Sub branches relating to each of the blot titles listed contain the project in the state it was in when when the blog post was published.
 
 ## Compatibility
-Verified that this repository's code works in XCode 7.0 with Swift 2.0
+Verified that this repository's code works in Xcode 8 with Swift 2.3
