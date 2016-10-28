@@ -76,7 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("Zootastic.sqlite")
         
         do {
-            try NSFileManager.defaultManager().removeItemAtURL(url)
+            try NSFileManager.defaultManager().removeItemAtURL(url!)
         } catch _ {
         }
 
