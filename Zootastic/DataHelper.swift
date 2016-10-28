@@ -144,8 +144,10 @@ public class DataHelper {
 		
 		for animal in allAnimals {
 			print("\(animal.commonName), a member of the \(animal.classification.family) family, lives in the \(animal.habitat) at the following zoos:\n", terminator: "")
-			for zoo in animal.zoos {
-				print("> \(zoo.name)\n", terminator: "")
+			for zooElement in animal.zoos {
+                if let zoo = zooElement as? Zoo {
+                    print("> \(zoo.name)\n", terminator: "")
+                }
 			}
 			print("-------\n", terminator: "")
 		}
