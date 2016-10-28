@@ -11,29 +11,16 @@ import CoreData
 
 public class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
 	
-	public var context: NSManagedObjectContext!
+	open var context: NSManagedObjectContext!
 	
-	lazy var fetchedResultsController: NSFetchedResultsController = {
-		let animalsFetchRequest = NSFetchRequest(entityName: "Animal")
-		let primarySortDescriptor = NSSortDescriptor(key: "classification.order", ascending: true)
-		let secondarySortDescriptor = NSSortDescriptor(key: "commonName", ascending: true)
-		animalsFetchRequest.sortDescriptors = [primarySortDescriptor, secondarySortDescriptor]
-		
-		let frc = NSFetchedResultsController(
-			fetchRequest: animalsFetchRequest,
-			managedObjectContext: self.context,
-			sectionNameKeyPath: "classification.order",
-			cacheName: nil)
-		
-		frc.delegate = self
-		
-		return frc
-		}()
+	var fetchedResultsController: NSFetchedResultsController<Animal>!
 	
 	override public func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
 
+        configureFetchedResultsController()
+        
         do {
             try fetchedResultsController.performFetch()
         } catch {
@@ -43,13 +30,29 @@ public class MainViewController: UIViewController, UITableViewDataSource, UITabl
 
 	}
 	
+    func configureFetchedResultsController() {
+        let animalsFetchRequest = NSFetchRequest<Animal>(entityName: "Animal")
+        let primarySortDescriptor = NSSortDescriptor(key: "classification.order", ascending: true)
+        let secondarySortDescriptor = NSSortDescriptor(key: "commonName", ascending: true)
+        animalsFetchRequest.sortDescriptors = [primarySortDescriptor, secondarySortDescriptor]
+        
+        self.fetchedResultsController = NSFetchedResultsController<Animal>(
+            fetchRequest: animalsFetchRequest,
+            managedObjectContext: self.context,
+            sectionNameKeyPath: "classification.order",
+            cacheName: nil)
+        
+        self.fetchedResultsController.delegate = self
+        
+    }
+    
 	override public func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
 	}
 	
 	// MARK: TableView Data Source
-	public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+	public func numberOfSections(in tableView: UITableView) -> Int {
 		if let sections = fetchedResultsController.sections {
 			return sections.count
 		}
@@ -57,7 +60,7 @@ public class MainViewController: UIViewController, UITableViewDataSource, UITabl
 		return 0
 	}
 	
-	public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		if let sections = fetchedResultsController.sections {
 			let currentSection = sections[section] 
 			return currentSection.numberOfObjects
@@ -66,9 +69,9 @@ public class MainViewController: UIViewController, UITableViewDataSource, UITabl
 		return 0
 	}
 	
-	public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) 
-		let animal = fetchedResultsController.objectAtIndexPath(indexPath) as! Animal
+	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) 
+		let animal = fetchedResultsController.object(at: indexPath)
 		
 		cell.textLabel?.text = animal.commonName
 		cell.detailTextLabel?.text = animal.habitat
@@ -76,7 +79,7 @@ public class MainViewController: UIViewController, UITableViewDataSource, UITabl
 		return cell
 	}
 	
-	public func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+	public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		if let sections = fetchedResultsController.sections {
 			let currentSection = sections[section] 
 			return currentSection.name
