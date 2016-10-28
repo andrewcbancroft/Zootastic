@@ -14,7 +14,7 @@ public class DataHelper {
 		seedAnimals()
 	}
 	
-	private func seedZoos() {
+	fileprivate func seedZoos() {
 		let zoos = [
 			(name: "Oklahoma City Zoo", location: "Oklahoma City, OK"),
 			(name: "Lowry Park Zoo", location: "Tampa, FL"),
@@ -22,7 +22,7 @@ public class DataHelper {
 		]
 		
 		for zoo in zoos {
-			let newZoo = NSEntityDescription.insertNewObjectForEntityForName("Zoo", inManagedObjectContext: context) as! Zoo
+			let newZoo = NSEntityDescription.insertNewObject(forEntityName: "Zoo", into: context) as! Zoo
 			newZoo.name = zoo.name
 			newZoo.location = zoo.location
 		}
@@ -33,7 +33,7 @@ public class DataHelper {
 		}
 	}
 	
-	private func seedClassifications() {
+	fileprivate func seedClassifications() {
 		let classifications = [
 			(scientificClassification: "Mammalia", order: "Sirenia", family: "Trichechidae"),
 			(scientificClassification: "Mammalia", order: "Primates", family: "Atelidae"),
@@ -41,7 +41,7 @@ public class DataHelper {
 		]
 		
 		for classification in classifications {
-			let newClassification = NSEntityDescription.insertNewObjectForEntityForName("Classification", inManagedObjectContext: context) as! Classification
+			let newClassification = NSEntityDescription.insertNewObject(forEntityName: "Classification", into: context) as! Classification
 			newClassification.scientificClassification = classification.scientificClassification
 			newClassification.family = classification.family
 			newClassification.order = classification.order
@@ -53,9 +53,9 @@ public class DataHelper {
 		}
 	}
 	
-	private func seedAnimals() {
-		let classificationFetchRequest = NSFetchRequest(entityName: "Classification")
-		let allClassifications = (try! context.executeFetchRequest(classificationFetchRequest)) as! [Classification]
+	fileprivate func seedAnimals() {
+		let classificationFetchRequest = NSFetchRequest<Classification>(entityName: "Classification")
+		let allClassifications = try! context.fetch(classificationFetchRequest)
 
 		let manatee = allClassifications.filter({(c: Classification) -> Bool in
 			return c.family == "Trichechidae"
@@ -70,8 +70,8 @@ public class DataHelper {
 		}).first
 		
 		
-		let zooFetchRequest = NSFetchRequest(entityName: "Zoo")
-		let allZoos = (try! context.executeFetchRequest(zooFetchRequest)) as! [Zoo]
+		let zooFetchRequest = NSFetchRequest<Zoo>(entityName: "Zoo")
+		let allZoos = try! context.fetch(zooFetchRequest)
 		
 		let oklahomaCityZoo = allZoos.filter({ (z: Zoo) -> Bool in
 			return z.name == "Oklahoma City Zoo"
@@ -94,7 +94,7 @@ public class DataHelper {
 		]
 		
 		for animal in animals {
-			let newAnimal = NSEntityDescription.insertNewObjectForEntityForName("Animal", inManagedObjectContext: context) as! Animal
+			let newAnimal = NSEntityDescription.insertNewObject(forEntityName: "Animal", into: context) as! Animal
 			newAnimal.commonName = animal.commonName
 			newAnimal.habitat = animal.habitat
 			newAnimal.classification = animal.classification
@@ -109,12 +109,12 @@ public class DataHelper {
 	
 	
 	public func printAllZoos() {
-		let zooFetchRequest = NSFetchRequest(entityName: "Zoo")
+		let zooFetchRequest = NSFetchRequest<Zoo>(entityName: "Zoo")
 		let primarySortDescriptor = NSSortDescriptor(key: "name", ascending: true)
 		
 		zooFetchRequest.sortDescriptors = [primarySortDescriptor]
 		
-		let allZoos = (try! context.executeFetchRequest(zooFetchRequest)) as! [Zoo]
+		let allZoos = try! context.fetch(zooFetchRequest)
 		
 		for zoo in allZoos {
 			print("Zoo Name: \(zoo.name)\nLocation: \(zoo.location) \n-------\n", terminator: "")
@@ -122,30 +122,32 @@ public class DataHelper {
 	}
 	
 	public func printAllClassifications() {
-		let classificationFetchRequest = NSFetchRequest(entityName: "Classification")
+		let classificationFetchRequest = NSFetchRequest<Classification>(entityName: "Classification")
 		let primarySortDescriptor = NSSortDescriptor(key: "family", ascending: true)
 		
 		classificationFetchRequest.sortDescriptors = [primarySortDescriptor]
 		
-		let allClassifications = (try! context.executeFetchRequest(classificationFetchRequest)) as! [Classification]
-		
+		let allClassifications = try! context.fetch(classificationFetchRequest)
+        
 		for classification in allClassifications {
 			print("Scientific Classification: \(classification.scientificClassification)\nOrder: \(classification.order)\nFamily: \(classification.family) \n-------\n", terminator: "")
 		}
 	}
 	
 	public func printAllAnimals() {
-		let animalFetchRequest = NSFetchRequest(entityName: "Animal")
+		let animalFetchRequest = NSFetchRequest<Animal>(entityName: "Animal")
 		let primarySortDescriptor = NSSortDescriptor(key: "habitat", ascending: true)
 		
 		animalFetchRequest.sortDescriptors = [primarySortDescriptor]
 		
-		let allAnimals = (try! context.executeFetchRequest(animalFetchRequest)) as! [Animal]
+		let allAnimals = try! context.fetch(animalFetchRequest)
 		
 		for animal in allAnimals {
 			print("\(animal.commonName), a member of the \(animal.classification.family) family, lives in the \(animal.habitat) at the following zoos:\n", terminator: "")
-			for zoo in animal.zoos {
-				print("> \(zoo.name)\n", terminator: "")
+			for zooElement in animal.zoos {
+                if let zoo = zooElement as? Zoo {
+                    print("> \(zoo.name)\n", terminator: "")
+                }
 			}
 			print("-------\n", terminator: "")
 		}
