@@ -1,7 +1,7 @@
 # Zootastic
 
 ## Resources
-This repository contains an example XCode project for the following blog posts at [andrewcbancroft.com](http://www.andrewcbancroft.com):
+This repository contains an example Xcode project for the following blog posts at [andrewcbancroft.com](http://www.andrewcbancroft.com):
 
 * [Using Swift to Seed a Core Data Database](http://www.andrewcbancroft.com/2015/02/25/using-swift-to-seed-a-core-data-database/)
 * [Displaying Data With NSFetchedResultsController and Swift](http://www.andrewcbancroft.com/2015/03/05/displaying-data-with-nsfetchedresultscontroller-and-swift/)
