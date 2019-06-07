@@ -5,7 +5,7 @@ This repository contains an example Xcode project for the following blog posts a
 
 * [Using Swift to Seed a Core Data Database](http://www.andrewcbancroft.com/2015/02/25/using-swift-to-seed-a-core-data-database/)
 * [Displaying Data With NSFetchedResultsController and Swift](http://www.andrewcbancroft.com/2015/03/05/displaying-data-with-nsfetchedresultscontroller-and-swift/)
-* [Sync Table View Data: NSFetchedResultsController and Swift] (https://www.andrewcbancroft.com/2015/05/28/sync-table-view-data-nsfetchedresultscontroller-swift/)
+* [Sync Table View Data: NSFetchedResultsController and Swift](https://www.andrewcbancroft.com/2015/05/28/sync-table-view-data-nsfetchedresultscontroller-swift/)
 
 Master contains all merged changes to the Zootastic example.
 
